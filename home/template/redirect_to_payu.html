@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redirecting to PayU</title>
+</head>
+<body>
+    <h1>Redirecting to PayU...</h1>
+    <form id="payu-form" action="{{ data.payu_url }}" method="post">
+        {% csrf_token %}
+        {% for key, value in data.items %}
+            <input type="hidden" name="{{ key }}" value="{{ value }}">
+        {% endfor %}
+        <!-- Optionally, you can include a submit button for manual submission -->
+        <button type="submit">Pay Now</button>
+    </form>
+
+    <script>
+        // Automatically submit the form after page load
+        document.getElementById('payu-form').submit();
+    </script>
+</body>
+</html>
