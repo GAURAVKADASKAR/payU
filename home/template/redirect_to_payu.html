@@ -5,14 +5,19 @@
 </head>
 <body>
     <h1>Redirecting to PayU...</h1>
-    <form id="payu-form" action="{{ data.payu_url }}" method="post">
-        {% csrf_token %}
-        {% for key, value in data.items %}
-            <input type="hidden" name="{{ key }}" value="{{ value }}">
-        {% endfor %}
-        <!-- Optionally, you can include a submit button for manual submission -->
-        <button type="submit">Pay Now</button>
-    </form>
+ <!-- redirect_to_payu.html -->
+
+<html>
+    <body onload="document.forms['payu_form'].submit()">
+        <form name="payu_form" action="{{ data.payu_url }}" method="post">
+            {% csrf_token %}
+            {% for key, value in data.items %}
+                <input type="hidden" name="{{ key }}" value="{{ value }}">
+            {% endfor %}
+        </form>
+    </body>
+    </html>
+    
 
     <script>
         // Automatically submit the form after page load
